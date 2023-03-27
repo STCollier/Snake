@@ -53,6 +53,8 @@ void createWindow() {
         exit(1);
     }
 
+    glEnable(GL_DEPTH_TEST);
+
     glfwSetFramebufferSizeCallback(window.self, _sizeCallback);
     glfwSetKeyCallback(window.self, _keyboardCallback);
 }
@@ -64,6 +66,7 @@ void terminateWindow() {
 
 void updateWindow() {
     _keyboardCallback();
+    
 
     float currentFrame = glfwGetTime();
     window.dt = currentFrame - window.lastFrame;
