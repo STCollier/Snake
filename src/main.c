@@ -2,7 +2,7 @@
 
 int main() {
 
-    printf("Snake time");
+    printf("Snake time\n");
    
     return 0;
 }
