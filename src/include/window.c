@@ -39,7 +39,7 @@ void createWindow() {
         glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     #endif
 
-    window.self = glfwCreateWindow(window.width, window.height, "LearnOpenGL", NULL, NULL);
+    window.self = glfwCreateWindow(window.width, window.height, window.title, NULL, NULL);
     if (window.self == NULL) {
         printf("Failed to create GLFW window");
         glfwTerminate();

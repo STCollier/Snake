@@ -8,22 +8,22 @@
 #include "cglm/cglm.h"
 #include "cglm/call.h"
 
-#include "floor.h"
+#include "snake.h"
 
-struct Floor _floor;
+struct Snake snake;
 
-void initFloor() {
+void initSnake() {
     float vertices[] = {
         //positions     //texture coords
-        -1, -1,  0.1,   0.0f, 0.0f, 
-         1, -1,  0.1,   1.0f, 0.0f, 
-        -1,  1,  0.5,   0.0f, 1.0f,
-         1,  1,  0.5,   1.0f, 1.0f,
+        -1, -1,  1,   0.0f, 0.0f, 
+         1, -1,  1,   1.0f, 0.0f, 
+        -1,  1,  1,   0.0f, 1.0f,
+         1,  1,  1,   1.0f, 1.0f,
 
-        -1, -1, -0.1,   0.0f, 0.0f,
-         1, -1, -0.1,   1.0f, 0.0f,
-        -1,  1, -0.5,   0.0f, 1.0f,
-         1,  1, -0.5,   1.0f, 1.0f 
+        -1, -1, -1,   0.0f, 0.0f,
+         1, -1, -1,   1.0f, 0.0f,
+        -1,  1, -1,   0.0f, 1.0f,
+         1,  1, -1,   1.0f, 1.0f 
     };
 
     unsigned int indices[] = {
@@ -52,8 +52,8 @@ void initFloor() {
         4, 5, 7
     };
 
-    glGenTextures(1, &_floor.texture);
-    glBindTexture(GL_TEXTURE_2D, _floor.texture);
+    glGenTextures(1, &snake.texture);
+    glBindTexture(GL_TEXTURE_2D, snake.texture);
 
     // set the texture wrapping parameters
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -62,31 +62,31 @@ void initFloor() {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-    glPixelStorei(GL_UNPACK_ALIGNMENT, 2);
+    //glPixelStorei(GL_UNPACK_ALIGNMENT, 2);
+    
     // load image, create texture and generate mipmaps
     int width, height, nrChannels;
     
-    unsigned char *data = stbi_load("res/textures/floor.png", &width, &height, &nrChannels, 0);
+    unsigned char *data = stbi_load("res/textures/snake.png", &width, &height, &nrChannels, 0);
     if (data) {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
     } else {
-        printf("Could not load floor texture\n");
+        printf("Could not load snake texture\n");
     }
 
     stbi_image_free(data);
 
-    glGenVertexArrays(1, &_floor.VAO);
-    glGenBuffers(1, &_floor.VBO);
-    glGenBuffers(1, &_floor.EBO);
+    glGenVertexArrays(1, &snake.VAO);
+    glGenBuffers(1, &snake.VBO);
+    glGenBuffers(1, &snake.EBO);
 
-    glBindVertexArray(_floor.VAO);
+    glBindVertexArray(snake.VAO);
 
-    glBindBuffer(GL_ARRAY_BUFFER, _floor.VBO);
+    glBindBuffer(GL_ARRAY_BUFFER, snake.VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-    //OH MY GOSH ITS GL_ELEMENT_ARRAY_BUFFER INSTEAD OF GL_ARRAY_BUFFER FINALLY
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _floor.EBO);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, snake.EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
     //position attribute
@@ -98,15 +98,15 @@ void initFloor() {
     glEnableVertexAttribArray(1);
 }
 
-void drawFloor() {
-    glBindTexture(GL_TEXTURE_2D, _floor.texture);
+void drawSnake() {
+    glBindTexture(GL_TEXTURE_2D, snake.texture);
 
-    glBindVertexArray(_floor.VAO);
+    glBindVertexArray(snake.VAO);
     glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 }
 
-void destroyFloor() {
-    glDeleteVertexArrays(1, &_floor.VAO);
-    glDeleteBuffers(1, &_floor.VBO);
-    glDeleteBuffers(1, &_floor.EBO);
+void destroySnake() {
+    glDeleteVertexArrays(1, &snake.VAO);
+    glDeleteBuffers(1, &snake.VBO);
+    glDeleteBuffers(1, &snake.EBO);
 }

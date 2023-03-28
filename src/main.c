@@ -13,6 +13,7 @@
 #include "include/shader.h"
 #include "include/window.h"
 #include "include/floor.h"
+#include "include/snake.h"
 
 int main() {
 
