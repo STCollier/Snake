@@ -10,6 +10,7 @@ struct Window {
     int width;
     int height;
 
+    float fov; //field of view
     float dt; //Delta Time
     float lastFrame; 
 };
