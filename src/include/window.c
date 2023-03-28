@@ -53,7 +53,7 @@ void createWindow() {
         exit(1);
     }
 
-    //glEnable(GL_DEPTH_TEST);
+    glEnable(GL_DEPTH_TEST);
 
     glfwSetFramebufferSizeCallback(window.self, _sizeCallback);
     glfwSetKeyCallback(window.self, _keyboardCallback);
@@ -74,5 +74,5 @@ void updateWindow() {
 
     // render
     glClearColor(0.4f, 0.9f, 1.0f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
