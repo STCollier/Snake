@@ -23,33 +23,37 @@ int main() {
 
     struct Shader mainShader = createShader("res/shaders/main.vs", "res/shaders/main.fs");
 
-
     while (!glfwWindowShouldClose(window.self)) {
         updateWindow();
 
         useShader(mainShader);
 
         mat4 projection;
-        mat4 view;
-        mat4 model;
-
         glm_mat4_identity(projection);
-        glm_mat4_identity(view);
-        glm_mat4_identity(model);
-
-        glm_translate(view, (vec3) {0.0f, 0.0f, -4.0f});
-        glm_rotate(view, glm_rad(55.0f), (vec3) {1.0f, 0.0f, 0.0f});
-        glm_rotate(model, glm_rad(90.0f), (vec3) {1.0f, 0.0f, 0.0f});
         glm_perspective(glm_rad(window.fov), (float) window.width / (float) window.height, 0.1f, 100.0f, projection); //Make sure to convert to floats for float division
         //glm_ortho(-1.5f, 1.5f, -1.0f, 1.0f, 0.1f, 100.0f, projection);
-
-        drawFloor();
-
         setShaderMat4(mainShader, "projection", projection);
+
+        mat4 view;
+        glm_mat4_identity(view);
+        glm_translate(view, (vec3) {0.0f, -0.4f, -5.0f});
+        glm_rotate(view, glm_rad(55.0f), (vec3) {1.0f, 0.0f, 0.0f});
         setShaderMat4(mainShader, "view", view);
+        
+        mat4 model;
+        glm_mat4_identity(model);
+        glm_rotate(model, glm_rad(90.0f), (vec3) {1.0f, 0.0f, 0.0f});
+
         setShaderMat4(mainShader, "model", model);
-  
-        //drawSnake();
+        drawFloor(); //Uses the currently set matrix (rotation)
+
+        glm_mat4_identity(model); //Reset matrix
+        glm_rotate(model, glm_rad(90.0f), (vec3) {1.0f, 0.0f, 0.0f});
+        glm_scale(model, (vec3) {0.09, 0.09, 0.09}); //Construct second matrix
+        glm_translate(model, (vec3) {snake.x, snake.y, -11.5f});
+
+        setShaderMat4(mainShader, "model", model);
+        drawSnake(); //Uses the newly set matrix (scaling)
 
         glfwSwapBuffers(window.self);
         glfwPollEvents();

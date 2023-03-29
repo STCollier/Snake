@@ -9,10 +9,15 @@
 #include "cglm/call.h"
 
 #include "snake.h"
+#include "../world/window.h"
 
 struct Snake snake;
 
 void initSnake() {
+    snake.speed = 5;
+    snake.x = 0.0f;
+    snake.y = 0.0f;
+
     float vertices[] = {
         //positions     //texture coords
         -1, -1,  1,   0.0f, 0.0f, 
@@ -103,6 +108,37 @@ void drawSnake() {
 
     glBindVertexArray(snake.VAO);
     glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+
+    if (glfwGetKey(window.self, GLFW_KEY_UP) == GLFW_PRESS)
+        moveSnake(1);
+    if (glfwGetKey(window.self, GLFW_KEY_DOWN) == GLFW_PRESS)
+        moveSnake(2);
+    if (glfwGetKey(window.self, GLFW_KEY_LEFT) == GLFW_PRESS)
+        moveSnake(3);
+    if (glfwGetKey(window.self, GLFW_KEY_RIGHT) == GLFW_PRESS)
+        moveSnake(4);
+
+    if (snake.x >= 10.0f) snake.x = 10.0f;
+    if (snake.x <= -10.0f) snake.x = -10.0f;
+    if (snake.y >= 10.0f) snake.y = 10.0f;
+    if (snake.y <= -10.0f) snake.y = -10.0f;
+}
+
+void moveSnake(int direction) {
+    switch(direction) {
+        case 1: //UP
+            snake.y -= snake.speed * window.dt;
+            break;
+        case 2: //DOWN
+            snake.y += snake.speed * window.dt;
+            break;
+        case 3: //LEFT
+            snake.x -= snake.speed * window.dt;
+            break;
+        case 4: //RIGHT
+            snake.x += snake.speed * window.dt;
+            break;
+    }
 }
 
 void destroySnake() {

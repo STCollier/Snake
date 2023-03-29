@@ -15,15 +15,15 @@ struct Floor _floor;
 void initFloor() {
     float vertices[] = {
         //positions     //texture coords
-        -1, -1,  0.1,   0.0f, 0.0f, 
-         1, -1,  0.1,   1.0f, 0.0f, 
-        -1,  1,  0.5,   0.0f, 1.0f,
-         1,  1,  0.5,   1.0f, 1.0f,
+        -1, -1,  1,   0.0f, 0.0f, 
+         1, -1,  1,   1.0f, 0.0f, 
+        -1,  1,  1,   0.0f, 1.0f,
+         1,  1,  1,   1.0f, 1.0f,
 
-        -1, -1, -0.1,   0.0f, 0.0f,
-         1, -1, -0.1,   1.0f, 0.0f,
-        -1,  1, -0.5,   0.0f, 1.0f,
-         1,  1, -0.5,   1.0f, 1.0f 
+        -1, -1, -1,   0.0f, 0.0f,
+         1, -1, -1,   1.0f, 0.0f,
+        -1,  1, -1,   0.0f, 1.0f,
+         1,  1, -1,   1.0f, 1.0f 
     };
 
     unsigned int indices[] = {
@@ -64,11 +64,12 @@ void initFloor() {
 
     glPixelStorei(GL_UNPACK_ALIGNMENT, 2);
     // load image, create texture and generate mipmaps
+
     int width, height, nrChannels;
     
     unsigned char *data = stbi_load("res/textures/floor.png", &width, &height, &nrChannels, 0);
     if (data) {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
     } else {
         printf("Could not load floor texture\n");

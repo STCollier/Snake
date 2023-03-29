@@ -6,12 +6,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 struct Window window;
 
 static void _sizeCallback() {
     glViewport(0, 0, window.width, window.height);
 }
-
 
 static void _keyboardCallback() {
     if (glfwGetKey(window.self, GLFW_KEY_ESCAPE) == GLFW_PRESS)
@@ -65,9 +65,7 @@ void terminateWindow() {
     glfwTerminate();
 }
 
-void updateWindow() {
-    _keyboardCallback();
-    
+void updateWindow() {    
 
     float currentFrame = glfwGetTime();
     window.dt = currentFrame - window.lastFrame;
