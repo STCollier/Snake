@@ -10,10 +10,10 @@
 #include "cglm/cglm.h"
 #include "cglm/call.h"
 
-#include "include/shader.h"
-#include "include/window.h"
-#include "include/floor.h"
-#include "include/snake.h"
+#include "world/shader.h"
+#include "world/window.h"
+#include "objects/floor.h"
+#include "objects/snake.h"
 
 int main() {
 
