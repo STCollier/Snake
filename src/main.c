@@ -49,8 +49,8 @@ int main() {
 
         glm_mat4_identity(model); //Reset matrix
         glm_rotate(model, glm_rad(90.0f), (vec3) {1.0f, 0.0f, 0.0f});
-        glm_scale(model, (vec3) {0.09, 0.09, 0.09}); //Construct second matrix
-        glm_translate(model, (vec3) {snake.x, snake.y, -11.5f});
+        glm_scale(model, (vec3) {0.1, 0.1, 0.05}); //Construct second matrix
+        glm_translate(model, (vec3) {snake.x-1.0f, snake.y-1.0f, -21.0f}); //Offset to grid
 
         setShaderMat4(mainShader, "model", model);
         drawSnake(); //Uses the newly set matrix (scaling)

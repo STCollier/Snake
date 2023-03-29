@@ -12,11 +12,15 @@
 #include "../world/window.h"
 
 struct Snake snake;
+snakeDir dir;
 
 void initSnake() {
+    dir = Up; //Initilize direction
+
     snake.speed = 5;
     snake.x = 0.0f;
     snake.y = 0.0f;
+    snake.ticks = 0;
 
     float vertices[] = {
         //positions     //texture coords
@@ -103,41 +107,42 @@ void initSnake() {
     glEnableVertexAttribArray(1);
 }
 
+
 void drawSnake() {
+
+    snake.ticks++;
+
     glBindTexture(GL_TEXTURE_2D, snake.texture);
 
     glBindVertexArray(snake.VAO);
     glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
     if (glfwGetKey(window.self, GLFW_KEY_UP) == GLFW_PRESS)
-        moveSnake(1);
+        dir = Up;
     if (glfwGetKey(window.self, GLFW_KEY_DOWN) == GLFW_PRESS)
-        moveSnake(2);
+        dir = Down;
     if (glfwGetKey(window.self, GLFW_KEY_LEFT) == GLFW_PRESS)
-        moveSnake(3);
+        dir = Left;
     if (glfwGetKey(window.self, GLFW_KEY_RIGHT) == GLFW_PRESS)
-        moveSnake(4);
+        dir = Right;
 
-    if (snake.x >= 10.0f) snake.x = 10.0f;
-    if (snake.x <= -10.0f) snake.x = -10.0f;
-    if (snake.y >= 10.0f) snake.y = 10.0f;
-    if (snake.y <= -10.0f) snake.y = -10.0f;
-}
+    if (snake.ticks == 20) {
+        switch(dir) {
+            case Up:
+                snake.y -= 2.0f;
+                break;
+            case Down:
+                snake.y += 2.0f;
+                break;
+            case Left:
+                snake.x -= 2.0f;
+                break;
+            case Right:
+                snake.x += 2.0f;
+                break;
+        }
 
-void moveSnake(int direction) {
-    switch(direction) {
-        case 1: //UP
-            snake.y -= snake.speed * window.dt;
-            break;
-        case 2: //DOWN
-            snake.y += snake.speed * window.dt;
-            break;
-        case 3: //LEFT
-            snake.x -= snake.speed * window.dt;
-            break;
-        case 4: //RIGHT
-            snake.x += snake.speed * window.dt;
-            break;
+        snake.ticks = 0;
     }
 }
 

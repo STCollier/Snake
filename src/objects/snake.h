@@ -6,12 +6,20 @@ struct Snake {
     unsigned int texture;
     float x, y;
     int speed;
+    int ticks;
 };
+
+typedef enum {
+    Up,
+    Down,
+    Left,
+    Right
+} snakeDir;
 
 void initSnake();
 void drawSnake();
 void destroySnake();
-void moveSnake(int direction);
+void moveSnake();
 
 extern struct Snake snake;
 
