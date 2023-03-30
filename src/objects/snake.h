@@ -17,9 +17,8 @@ typedef enum {
 } snakeDir;
 
 void initSnake();
-void drawSnake();
+void renderSnake(struct Shader shader);
 void destroySnake();
-void moveSnake();
 
 extern struct Snake snake;
 

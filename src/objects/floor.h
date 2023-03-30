@@ -7,7 +7,7 @@ struct Floor {
 };
 
 void initFloor();
-void drawFloor();
+void renderFloor(struct Shader shader);
 void destroyFloor();
 
 #endif

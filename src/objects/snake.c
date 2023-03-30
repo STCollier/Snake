@@ -8,8 +8,10 @@
 #include "cglm/cglm.h"
 #include "cglm/call.h"
 
-#include "snake.h"
 #include "../world/window.h"
+#include "../world/shader.h"
+#include "../world/camera.h"
+#include "snake.h"
 
 struct Snake snake;
 snakeDir dir;
@@ -107,8 +109,7 @@ void initSnake() {
     glEnableVertexAttribArray(1);
 }
 
-
-void drawSnake() {
+static void _drawSnake() {
 
     snake.ticks++;
 
@@ -144,6 +145,16 @@ void drawSnake() {
 
         snake.ticks = 0;
     }
+}
+
+void renderSnake(struct Shader shader) {
+    glm_mat4_identity(camera.model); //Reset matrix
+    glm_rotate(camera.model, glm_rad(90.0f), (vec3) {1.0f, 0.0f, 0.0f});
+    glm_scale(camera.model, (vec3) {0.1, 0.1, 0.05}); //Construct second matrix
+    glm_translate(camera.model, (vec3) {snake.x-1.0f, snake.y-1.0f, -21.0f}); //Offset to grid
+
+    setShaderMat4(shader, "model", camera.model);
+    _drawSnake();
 }
 
 void destroySnake() {

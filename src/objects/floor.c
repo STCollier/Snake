@@ -8,6 +8,8 @@
 #include "cglm/cglm.h"
 #include "cglm/call.h"
 
+#include "../world/camera.h"
+#include "../world/shader.h"
 #include "floor.h"
 
 struct Floor _floor;
@@ -99,11 +101,19 @@ void initFloor() {
     glEnableVertexAttribArray(1);
 }
 
-void drawFloor() {
+static void _drawFloor() {
     glBindTexture(GL_TEXTURE_2D, _floor.texture);
 
     glBindVertexArray(_floor.VAO);
     glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+}
+
+void renderFloor(struct Shader shader) {
+    glm_mat4_identity(camera.model);
+    glm_rotate(camera.model, glm_rad(90.0f), (vec3) {1.0f, 0.0f, 0.0f});
+
+    setShaderMat4(shader, "model", camera.model);
+    _drawFloor();
 }
 
 void destroyFloor() {
