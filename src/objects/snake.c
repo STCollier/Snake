@@ -162,17 +162,32 @@ static void _drawSnake() {
 
     // Check if the snake eats an apple
     if (snake.head.x == apple.x && snake.head.y == apple.y) {
-        // Generate a new apple
-        int rx = (rand() % (10 + 1 + 8) - 8);
-        int ry = (rand() % (10 + 1 + 8) - 8);
-        float ax = (rx + rx % 2) - 1.0f;
-        float ay = (ry + ry % 2) - 1.0f;
+        int rx, ry;
+        int valid = 0;
 
-        apple.x = ax;
-        apple.y = ay;
+        while (!valid) {
+            rx = (rand() % (10 + 1 + 8) - 8);
+            ry = (rand() % (10 + 1 + 8) - 8);
+            float ax = (rx + rx % 2) - 1.0f;
+            float ay = (ry + ry % 2) - 1.0f;
 
+            // Check if the new apple is not inside the snake's body
+            valid = 1;
+            for (int i = 0; i < snake.size; i++) {
+                if (snake.body[i].x == ax && snake.body[i].y == ay) {
+                    valid = 0;
+                    break;
+                }
+            }
+            if (valid) {
+                apple.x = ax;
+                apple.y = ay;
+            }
+        }
 
         snake.size++;
+
+        printf("SCORE: %d\n", snake.size-1);
 
         if(snake.size > 1) {
             int last = snake.size - 1;
@@ -183,14 +198,14 @@ static void _drawSnake() {
     // Check if the snake hits its own body
     for (int i = 1; i < snake.size; i++) {
         if (snake.head.x == snake.body[i].x && snake.head.y == snake.body[i].y && snake.size > 2) {
-            printf("You Died (hit yourself)!\n\n");
+            printf("You Died!\n\n");
             exit(1);
         }
     }
 
-
+    //Check if snake hits wall
     if (snake.head.x >= 10.0f || snake.head.x <= -10.0f || snake.head.y >= 10.0f || snake.head.y <= -10.0f) {
-        printf("You Died (ran into wall)\n\n");
+        printf("You Died!\n\n");
         exit(1);
     }
 }
