@@ -13,7 +13,7 @@ The game is quite buggy at the moment so please report all bugs in [issues](http
     - GLFW library (`sudo apt-get install libglfw3-dev`)
     - [stb_image.h](https://github.com/nothings/stb/blob/master/stb_image.h)
     - [GLAD](https://glad.dav1d.de/) (v.3.3)
-    - [cglm] (https://github.com/recp/cglm)
+    - [cglm](https://github.com/recp/cglm)
 
 - Windows
     - no
