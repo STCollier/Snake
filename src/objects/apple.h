@@ -12,4 +12,6 @@ void initApple();
 void renderApple(struct Shader shader);
 void destroyApple();
 
+extern struct Apple apple;
+
 #endif

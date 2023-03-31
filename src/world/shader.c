@@ -109,3 +109,7 @@ void setShaderFloat(struct Shader self, char* name, float value) {
 void setShaderMat4(struct Shader self, char* name, const mat4 mat) {
   glUniformMatrix4fv(glGetUniformLocation(self.ID, name), 1, GL_FALSE, &mat[0][0]);
 }
+
+void setShaderVec4(struct Shader self, char* name, float r, float g, float b) {
+  glUniform4f(glGetUniformLocation(self.ID, name), r, g, b, 1.0f);
+}

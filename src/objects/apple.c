@@ -113,21 +113,20 @@ void initApple() {
     glEnableVertexAttribArray(1);
 }
 
-static void _drawApple() {
+
+void renderApple(struct Shader shader) {
     glBindTexture(GL_TEXTURE_2D, apple.texture);
 
     glBindVertexArray(apple.VAO);
-    glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-}
 
-void renderApple(struct Shader shader) {
     glm_mat4_identity(camera.model); //Reset matrix
     glm_rotate(camera.model, glm_rad(90.0f), (vec3) {1.0f, 0.0f, 0.0f});
     glm_scale(camera.model, (vec3) {0.1, 0.1, 0.05}); //Construct second matrix
     glm_translate(camera.model, (vec3) {apple.x, apple.y, -21.0f}); //Offset to grid
 
     setShaderMat4(shader, "model", camera.model);
-    _drawApple();
+    
+    glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 }
 
 void destroyApple() {
