@@ -174,16 +174,15 @@ static void _drawSnake() {
 
         snake.size++;
 
-        if (snake.size > 2) {
-            snake.body[snake.size-1] = snake.body[snake.size-2];
-        } else if (snake.size == 1) {
-            // Set the second-to-last element to be one unit behind the head
+        if(snake.size > 1) {
+            int last = snake.size - 1;
+            snake.body[last] = snake.body[last-1];
         }
     }
 
     // Check if the snake hits its own body
     for (int i = 1; i < snake.size; i++) {
-        if (snake.head.x == snake.body[i].x && snake.head.y == snake.body[i].y) {
+        if (snake.head.x == snake.body[i].x && snake.head.y == snake.body[i].y && snake.size > 2) {
             printf("You Died (hit yourself)!\n\n");
             exit(1);
         }
