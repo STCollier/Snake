@@ -1,7 +1,7 @@
 # Snake
-A snake game made with OpenGL and C (composed of 900 lines of questionable code)
+A snake game made with OpenGL and C (composed of 1000 lines of questionable code)
 
-![image](https://user-images.githubusercontent.com/81338469/229190939-9bffca2b-6ad4-4146-8ae8-2ebc88598565.png)
+![image](https://github.com/STCollier/Snake/assets/81338469/2b8d3cb8-c8c3-45c4-a12d-181485851c11)
 
 ## Building
 
