@@ -1,3 +1,5 @@
+
+
 #include "glad/glad.h"
 #include <GLFW/glfw3.h>
 
@@ -16,7 +18,7 @@ void useCamera(struct Shader shader) {
 
     glm_mat4_identity(camera.projection);
     glm_perspective(glm_rad(window.fov), (float) window.width / (float) window.height, 0.1f, 100.0f, camera.projection); //Make sure to convert to floats for float division
-    //glm_ortho(-1.5f, 1.5f, -1.0f, 1.0f, 0.1f, 100.0f, projection);
+    //glm_ortho(-1.5f, 1.5f, -1.0f, 1.0f, 0.1f, 100.0f, camera.projection);
     setShaderMat4(shader, "projection", camera.projection);
 
     glm_mat4_identity(camera.view);

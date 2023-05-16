@@ -22,7 +22,7 @@ void createWindow() {
     window.title = "Snake";
     window.width = 1200;
     window.height = 800;
-    window.fov = 25.0f;
+    window.fov = 30.0f;
 
     window.dt = 0.0f;
     window.lastFrame = 0.0f;

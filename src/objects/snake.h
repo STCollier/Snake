@@ -6,22 +6,23 @@ struct Position {
 	int y;
 };
 
-struct Snake {
-    unsigned int VBO, VAO, EBO;
-    unsigned int texture;
-    struct Position body[100];
-    struct Position head;
-    int size;
-    int speed;
-    int ticks;
-};
-
 typedef enum {
     Up,
     Down,
     Left,
     Right
 } snakeDir;
+
+struct Snake {
+    unsigned int VBO, VAO, EBO;
+    unsigned int texture;
+    struct Position body[100];
+    struct Position head;
+    snakeDir dir;
+    int size;
+    int speed;
+    int ticks;
+};
 
 void initSnake();
 void renderSnake(struct Shader shader);

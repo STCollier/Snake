@@ -16,5 +16,6 @@ void setShaderInt(struct Shader self, char* name, int value);
 void setShaderFloat(struct Shader self, char* name, float value);
 void setShaderMat4(struct Shader self, char* name, const mat4 mat);
 void setShaderVec4(struct Shader self, char* name, float r, float g, float b);
+void setShaderVec3(struct Shader self, char* name, float r, float g, float b);
 
 #endif

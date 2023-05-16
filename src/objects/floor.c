@@ -16,42 +16,64 @@ struct Floor _floor;
 
 void initFloor() {
     float vertices[] = {
-        //positions     //texture coords
-        -1, -1,  1,   0.0f, 0.0f, 
-         1, -1,  1,   1.0f, 0.0f, 
-        -1,  1,  1,   0.0f, 1.0f,
-         1,  1,  1,   1.0f, 1.0f,
+         //positions          //uv        //normals
+        -1.0f, -1.0f, -1.0f,  0.0f, 0.0f, 0.0f,  0.0f, -1.0f,
+         1.0f, -1.0f, -1.0f,  1.0f, 0.0f, 0.0f,  0.0f, -1.0f, 
+         1.0f,  1.0f, -1.0f,  1.0f, 1.0f, 0.0f,  0.0f, -1.0f, 
+         1.0f,  1.0f, -1.0f,  1.0f, 1.0f, 0.0f,  0.0f, -1.0f, 
+        -1.0f,  1.0f, -1.0f,  0.0f, 1.0f, 0.0f,  0.0f, -1.0f, 
+        -1.0f, -1.0f, -1.0f,  0.0f, 0.0f, 0.0f,  0.0f, -1.0f, 
 
-        -1, -1, -1,   0.0f, 0.0f,
-         1, -1, -1,   1.0f, 0.0f,
-        -1,  1, -1,   0.0f, 1.0f,
-         1,  1, -1,   1.0f, 1.0f 
+        -1.0f, -1.0f,  1.0f,  0.0f, 0.0f, 0.0f,  0.0f, 1.0f,
+         1.0f, -1.0f,  1.0f,  1.0f, 0.0f, 0.0f,  0.0f, 1.0f,
+         1.0f,  1.0f,  1.0f,  1.0f, 1.0f, 0.0f,  0.0f, 1.0f,
+         1.0f,  1.0f,  1.0f,  1.0f, 1.0f, 0.0f,  0.0f, 1.0f,
+        -1.0f,  1.0f,  1.0f,  0.0f, 1.0f, 0.0f,  0.0f, 1.0f,
+        -1.0f, -1.0f,  1.0f,  0.0f, 0.0f, 0.0f,  0.0f, 1.0f,
+
+        -1.0f,  1.0f,  1.0f, 0.0f, 0.0f, -1.0f,  0.0f,  0.0f,
+        -1.0f,  1.0f, -1.0f, 1.0f, 0.0f, -1.0f,  0.0f,  0.0f,
+        -1.0f, -1.0f, -1.0f, 1.0f, 1.0f, -1.0f,  0.0f,  0.0f,
+        -1.0f, -1.0f, -1.0f, 1.0f, 1.0f, -1.0f,  0.0f,  0.0f,
+        -1.0f, -1.0f,  1.0f, 0.0f, 1.0f, -1.0f,  0.0f,  0.0f,
+        -1.0f,  1.0f,  1.0f, 0.0f, 0.0f, -1.0f,  0.0f,  0.0f,
+
+         1.0f,  1.0f,  1.0f, 0.0f, 0.0f,  1.0f,  0.0f,  0.0f,
+         1.0f,  1.0f, -1.0f, 1.0f, 0.0f,  1.0f,  0.0f,  0.0f,
+         1.0f, -1.0f, -1.0f, 1.0f, 1.0f,  1.0f,  0.0f,  0.0f,
+         1.0f, -1.0f, -1.0f, 1.0f, 1.0f,  1.0f,  0.0f,  0.0f,
+         1.0f, -1.0f,  1.0f, 0.0f, 1.0f,  1.0f,  0.0f,  0.0f,
+         1.0f,  1.0f,  1.0f, 0.0f, 0.0f,  1.0f,  0.0f,  0.0f,
+
+        -1.0f, -1.0f, -1.0f,  0.0f, 0.0f, 0.0f, -1.0f,  0.0f,
+         1.0f, -1.0f, -1.0f,  1.0f, 0.0f, 0.0f, -1.0f,  0.0f,
+         1.0f, -1.0f,  1.0f,  1.0f, 1.0f, 0.0f, -1.0f,  0.0f,
+         1.0f, -1.0f,  1.0f,  1.0f, 1.0f, 0.0f, -1.0f,  0.0f,
+        -1.0f, -1.0f,  1.0f,  0.0f, 1.0f, 0.0f, -1.0f,  0.0f,
+        -1.0f, -1.0f, -1.0f,  0.0f, 0.0f, 0.0f, -1.0f,  0.0f,
+
+        -1.0f,  1.0f, -1.0f, 0.0f, 0.0f,  0.0f,  1.0f,  0.0f,
+         1.0f,  1.0f, -1.0f, 1.0f, 0.0f,  0.0f,  1.0f,  0.0f,
+         1.0f,  1.0f,  1.0f, 1.0f, 1.0f,  0.0f,  1.0f,  0.0f,
+         1.0f,  1.0f,  1.0f, 1.0f, 1.0f,  0.0f,  1.0f,  0.0f,
+        -1.0f,  1.0f,  1.0f, 0.0f, 1.0f,  0.0f,  1.0f,  0.0f,
+        -1.0f,  1.0f, -1.0f, 0.0f, 0.0f,  0.0f,  1.0f,  0.0f
     };
 
+
     unsigned int indices[] = {
-        //Top
-        2, 6, 7,
-        2, 3, 7,
-
-        //Bottom
-        0, 4, 5,
-        0, 1, 5,
-
-        //Left
-        0, 2, 6,
-        0, 4, 6,
-
-        //Right
-        1, 3, 7,
-        1, 5, 7,
-
-        //Front
-        0, 2, 3,
-        0, 1, 3,
-
-        //Back
-        4, 6, 7,
-        4, 5, 7
+        0, 1, 2,
+        3, 4, 5,
+        6, 7, 8,
+        9, 10, 11,
+        12, 13, 14,
+        15, 16, 17,
+        18, 19, 20,
+        21, 22, 23,
+        24, 25, 26,
+        27, 28, 29,
+        30, 31, 32,
+        33, 34, 35
     };
 
     glGenTextures(1, &_floor.texture);
@@ -93,12 +115,18 @@ void initFloor() {
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
     //position attribute
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
 
     //texture coord attribute
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
-    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);   
+
+    //normal vectors
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(5 * sizeof(float)));
+    glEnableVertexAttribArray(2);   
+    
+
 }
 
 static void _drawFloor() {

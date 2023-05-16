@@ -113,3 +113,7 @@ void setShaderMat4(struct Shader self, char* name, const mat4 mat) {
 void setShaderVec4(struct Shader self, char* name, float r, float g, float b) {
   glUniform4f(glGetUniformLocation(self.ID, name), r, g, b, 1.0f);
 }
+
+void setShaderVec3(struct Shader self, char* name, float r, float g, float b) { 
+  glUniform3f(glGetUniformLocation(self.ID, name), r, g, b); 
+}

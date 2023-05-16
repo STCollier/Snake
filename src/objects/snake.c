@@ -18,10 +18,9 @@
 #include "snake.h"
 
 struct Snake snake;
-snakeDir dir;
 
 void initSnake() {
-    dir = Up; //Initilize direction
+    snake.dir = Up; //Initilize direction
 
     snake.speed = 15;
     snake.size = 1;
@@ -34,42 +33,64 @@ void initSnake() {
     snake.ticks = 0;
 
     float vertices[] = {
-        //positions     //texture coords
-        -1, -1,  1,   0.0f, 0.0f, 
-         1, -1,  1,   1.0f, 0.0f, 
-        -1,  1,  1,   0.0f, 1.0f,
-         1,  1,  1,   1.0f, 1.0f,
+         //positions          //uv        //normals
+        -1.0f, -1.0f, -1.0f,  0.0f, 0.0f, 0.0f,  0.0f, -1.0f,
+         1.0f, -1.0f, -1.0f,  1.0f, 0.0f, 0.0f,  0.0f, -1.0f, 
+         1.0f,  1.0f, -1.0f,  1.0f, 1.0f, 0.0f,  0.0f, -1.0f, 
+         1.0f,  1.0f, -1.0f,  1.0f, 1.0f, 0.0f,  0.0f, -1.0f, 
+        -1.0f,  1.0f, -1.0f,  0.0f, 1.0f, 0.0f,  0.0f, -1.0f, 
+        -1.0f, -1.0f, -1.0f,  0.0f, 0.0f, 0.0f,  0.0f, -1.0f, 
 
-        -1, -1, -1,   0.0f, 0.0f,
-         1, -1, -1,   1.0f, 0.0f,
-        -1,  1, -1,   0.0f, 1.0f,
-         1,  1, -1,   1.0f, 1.0f 
+        -1.0f, -1.0f,  1.0f,  0.0f, 0.0f, 0.0f,  0.0f, 1.0f,
+         1.0f, -1.0f,  1.0f,  1.0f, 0.0f, 0.0f,  0.0f, 1.0f,
+         1.0f,  1.0f,  1.0f,  1.0f, 1.0f, 0.0f,  0.0f, 1.0f,
+         1.0f,  1.0f,  1.0f,  1.0f, 1.0f, 0.0f,  0.0f, 1.0f,
+        -1.0f,  1.0f,  1.0f,  0.0f, 1.0f, 0.0f,  0.0f, 1.0f,
+        -1.0f, -1.0f,  1.0f,  0.0f, 0.0f, 0.0f,  0.0f, 1.0f,
+
+        -1.0f,  1.0f,  1.0f, 0.0f, 0.0f, -1.0f,  0.0f,  0.0f,
+        -1.0f,  1.0f, -1.0f, 1.0f, 0.0f, -1.0f,  0.0f,  0.0f,
+        -1.0f, -1.0f, -1.0f, 1.0f, 1.0f, -1.0f,  0.0f,  0.0f,
+        -1.0f, -1.0f, -1.0f, 1.0f, 1.0f, -1.0f,  0.0f,  0.0f,
+        -1.0f, -1.0f,  1.0f, 0.0f, 1.0f, -1.0f,  0.0f,  0.0f,
+        -1.0f,  1.0f,  1.0f, 0.0f, 0.0f, -1.0f,  0.0f,  0.0f,
+
+         1.0f,  1.0f,  1.0f, 0.0f, 0.0f,  1.0f,  0.0f,  0.0f,
+         1.0f,  1.0f, -1.0f, 1.0f, 0.0f,  1.0f,  0.0f,  0.0f,
+         1.0f, -1.0f, -1.0f, 1.0f, 1.0f,  1.0f,  0.0f,  0.0f,
+         1.0f, -1.0f, -1.0f, 1.0f, 1.0f,  1.0f,  0.0f,  0.0f,
+         1.0f, -1.0f,  1.0f, 0.0f, 1.0f,  1.0f,  0.0f,  0.0f,
+         1.0f,  1.0f,  1.0f, 0.0f, 0.0f,  1.0f,  0.0f,  0.0f,
+
+        -1.0f, -1.0f, -1.0f,  0.0f, 0.0f, 0.0f, -1.0f,  0.0f,
+         1.0f, -1.0f, -1.0f,  1.0f, 0.0f, 0.0f, -1.0f,  0.0f,
+         1.0f, -1.0f,  1.0f,  1.0f, 1.0f, 0.0f, -1.0f,  0.0f,
+         1.0f, -1.0f,  1.0f,  1.0f, 1.0f, 0.0f, -1.0f,  0.0f,
+        -1.0f, -1.0f,  1.0f,  0.0f, 1.0f, 0.0f, -1.0f,  0.0f,
+        -1.0f, -1.0f, -1.0f,  0.0f, 0.0f, 0.0f, -1.0f,  0.0f,
+
+        -1.0f,  1.0f, -1.0f, 0.0f, 0.0f,  0.0f,  1.0f,  0.0f,
+         1.0f,  1.0f, -1.0f, 1.0f, 0.0f,  0.0f,  1.0f,  0.0f,
+         1.0f,  1.0f,  1.0f, 1.0f, 1.0f,  0.0f,  1.0f,  0.0f,
+         1.0f,  1.0f,  1.0f, 1.0f, 1.0f,  0.0f,  1.0f,  0.0f,
+        -1.0f,  1.0f,  1.0f, 0.0f, 1.0f,  0.0f,  1.0f,  0.0f,
+        -1.0f,  1.0f, -1.0f, 0.0f, 0.0f,  0.0f,  1.0f,  0.0f
     };
 
+
     unsigned int indices[] = {
-        // Front face
         0, 1, 2,
-        2, 1, 3,
-
-        // Back face
-        4, 6, 5,
-        6, 7, 5,
-
-        // Left face
-        0, 2, 4,
-        4, 2, 6,
-
-        // Right face
-        1, 5, 3,
-        5, 7, 3,
-
-        // Top face
-        2, 3, 6,
-        6, 3, 7,
-
-        // Bottom face
-        0, 4, 1,
-        1, 4, 5
+        3, 4, 5,
+        6, 7, 8,
+        9, 10, 11,
+        12, 13, 14,
+        15, 16, 17,
+        18, 19, 20,
+        21, 22, 23,
+        24, 25, 26,
+        27, 28, 29,
+        30, 31, 32,
+        33, 34, 35
     };
 
     glGenTextures(1, &snake.texture);
@@ -110,31 +131,36 @@ void initSnake() {
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
     //position attribute
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
 
     //texture coord attribute
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
-    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);   
+
+    //normal vectors
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(5 * sizeof(float)));
+    glEnableVertexAttribArray(2);
+
 }
 
 static void _drawSnake() {
 
     snake.ticks++;
 
-    if (glfwGetKey(window.self, GLFW_KEY_UP) == GLFW_PRESS && dir != Down)
-        dir = Up;
-    else if (glfwGetKey(window.self, GLFW_KEY_DOWN) == GLFW_PRESS && dir != Up)
-        dir = Down;
-    else if (glfwGetKey(window.self, GLFW_KEY_LEFT) == GLFW_PRESS && dir != Right)
-        dir = Left;
-    else if (glfwGetKey(window.self, GLFW_KEY_RIGHT) == GLFW_PRESS && dir != Left)
-        dir = Right;
+    if (glfwGetKey(window.self, GLFW_KEY_UP) == GLFW_PRESS && snake.dir != Down)
+        snake.dir = Up;
+    else if (glfwGetKey(window.self, GLFW_KEY_DOWN) == GLFW_PRESS && snake.dir != Up)
+        snake.dir = Down;
+    else if (glfwGetKey(window.self, GLFW_KEY_LEFT) == GLFW_PRESS && snake.dir != Right)
+        snake.dir = Left;
+    else if (glfwGetKey(window.self, GLFW_KEY_RIGHT) == GLFW_PRESS && snake.dir != Left)
+        snake.dir = Right;
 
 
     if (snake.ticks == snake.speed) {
         // Move the snake's head in the direction specified by the dir variable
-        switch(dir) {
+        switch(snake.dir) {
             case Up:
                 snake.head.y -= 2.0f;
                 break;
